@@ -1,4 +1,4 @@
-#Reddit USL Soccer Standings Sidebar Updater
+# Reddit USL Soccer Standings Sidebar Updater
 
 Made for /u/Totschlag to update the sidebar of /r/SaintLouisFC with the Western Conference standings from [uslsoccer.com](http://www.uslsoccer.com/usl-standings).
 
@@ -6,20 +6,20 @@ Requires `username`, `password`, `client_id`, and `client_secret` for the Reddit
 
 Also requires the account to have moderator status in the subreddit of which the sidebar will be updated.
 
-#Dependencies
+# Dependencies
 
 - [Python 3](https://www.python.org/download/releases/3.0/)
 - [Requests](http://docs.python-requests.org/en/master/)
 
 You can have the dependencies automatically installed by executing `pip install -r requirements.txt`, although there is only one dependency. You will obviously have to obtain Python and pip manually.
 
-#Setup
+# Setup
 
-##Reddit Account
+## Reddit Account
 
 > Coming soon.
 
-##Configuration
+## Configuration
 
 The configuration file - `config.json` looks like this:
 
@@ -43,7 +43,7 @@ The configuration file - `config.json` looks like this:
 - `subreddit` is the name of the subreddit sidebar that's being updated.
 - `check_rate` is the rate - in seconds - that the bot will update the sidebar.
 
-#Sidebar Requirements
+# Sidebar Requirements
 
 The sidebar must have these two tags(?) in this order. They must be as shown, seperated from the rest of the sidebar by a blank newline. Everything within these two tags will be replaced and set to the table.
 
@@ -55,11 +55,11 @@ The sidebar must have these two tags(?) in this order. They must be as shown, se
 
 ```
 
-#Screenshots and GIFS
+# Screenshots and GIFS
 
 > Coming soon
 
-#Explanation
+# Explanation
 
 When the bot is first created it loads the configuration data from the `config.json` file. It then sends the `username`, `password`, `client_id`, and `client_secret` to the Reddit API to get a access token. This access token lasts 60 minutes, and is used to do actions as the reddit account.
 
@@ -81,7 +81,7 @@ The text within the above mentoned tags on the sidebar is then replaced with the
 
 The last thing needed is to send the new subreddit settings to reddit.
 
-#TODO
+# TODO
 
 > I may do some of these, I may do none of these. Depends on how worth-it said features would be
 

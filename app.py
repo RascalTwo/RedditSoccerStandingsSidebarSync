@@ -1,3 +1,27 @@
+#!/usr/bin/env python3
+
+# The MIT License (MIT)
+
+# Copyright (c) 2016 RascalTwo @ therealrascaltwo@gmail.com
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy of
+# this software and associated documentation files (the "Software"), to deal in
+# the Software without restriction, including without limitation the rights to
+# use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+# of the Software, and to permit persons to whom the Software is furnished to do
+# so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 import requests
 import json
 import time
@@ -11,7 +35,7 @@ class RedditUSLSoccerStandingsSidebarUpdater(object):
 
         self.token = self._get_token()
 
-    def headers(self, auth=True):
+    def _headers(self, auth=True):
         if auth:
             return {
                 "User-Agent": self.config["user_agent"],
@@ -31,7 +55,7 @@ class RedditUSLSoccerStandingsSidebarUpdater(object):
         return requests.post("https://www.reddit.com/api/v1/access_token",
                              auth=client_auth,
                              data=post_data,
-                             headers=self.headers(False)).json()
+                             headers=self._headers(False)).json()
 
     def run(self):
         uptime = 0
@@ -48,15 +72,15 @@ class RedditUSLSoccerStandingsSidebarUpdater(object):
                 subreddit_settings = self.get_subreddit_settings()["data"]
                 current_table = subreddit_settings["description"].split("[](/begin_table)")[1].split("[](/end_table)")[0]
 
-                prefix = "[](/begin_table)\n\nTeam | Pts | GP| Record\n---|---|---|---\n"
+                prefix = "\n\nTeam | Pts | GP| Record\n---|---|---|---\n"
                 latest_table = "\n".join(self.get_current_standings())
-                suffix = "\n\n*Updated {} {}*\n\n[](/end_table)".format(
+                suffix = "\n\n*Updated {} {}*\n\n".format(
                     time.strftime("%d %b %I:%M %p", time.localtime()),
                     time.tzname[0])
 
                 subreddit_settings["description"] = subreddit_settings["description"].replace(current_table, prefix + latest_table + suffix)
 
-                self.change_sidebar_content(subreddit_settings["description"])
+                self.change_sidebar_content(subreddit_settings)
 
                 print("Updated.")
 
@@ -101,7 +125,7 @@ class RedditUSLSoccerStandingsSidebarUpdater(object):
 
     def get_subreddit_settings(self):
         response = requests.get("https://oauth.reddit.com/r/{}/about/edit.json".format(self.config["subreddit"]),
-                                headers=self.headers())
+                                headers=self._headers())
         return response.json()
 
     def change_sidebar_content(self, post_data):
@@ -111,7 +135,7 @@ class RedditUSLSoccerStandingsSidebarUpdater(object):
         post_data["sr"] = post_data["subreddit_id"]
         response = requests.post("https://oauth.reddit.com/api/site_admin",
                                  data=post_data,
-                                 headers=self.headers())
+                                 headers=self._headers())
 
 
 if __name__ == "__main__":
