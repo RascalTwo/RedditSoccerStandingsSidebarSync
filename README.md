@@ -17,7 +17,23 @@ You can have the dependencies automatically installed by executing `pip install 
 
 ## Reddit Account
 
-> Coming soon.
+Go the `Apps` tab of your reddit account preferences.
+
+![reddit-prefs](http://storage7.static.itmages.com/i/16/0501/s_1462140826_8984078_446e746f8e.png)
+
+Give it a name of whatever you want - you can change this later - and a redirect URL of `http://127.0.0.1:6504/authorize_callback`. You won't need to use this for this bot, it just requires this field to be filled out. Also make sure to mark it as a `Script`.
+
+![app-details](http://storage6.static.itmages.com/i/16/0501/s_1462140810_6036602_5f4ec5ea74.png)
+
+You'll then see the ID and secret of the application. You enter these in the `client_id` and `client_secret` fields. They are marked red and green respectively.
+
+![app-required-info](http://storage8.static.itmages.com/i/16/0501/s_1462140840_4856854_ceffa97d7e.png)
+
+You will also need to change all the highlighted fields in the `config.json` accordinly. You should have text before the forward slash & version number in the `user_agent` field be the same as the app name you created.
+
+![config-filled-out](http://storage9.static.itmages.com/i/16/0501/s_1462140852_9800517_c6ff51fa92.png)
+
+That's all the setup required for the app. You can now exeute the script and it should work.
 
 ## Configuration
 
@@ -55,10 +71,6 @@ The sidebar must have these two tags(?) in this order. They must be as shown, se
 
 ```
 
-# Screenshots and GIFS
-
-> Coming soon
-
 # Explanation
 
 When the bot is first created it loads the configuration data from the `config.json` file. It then sends the `username`, `password`, `client_id`, and `client_secret` to the Reddit API to get a access token. This access token lasts 60 minutes, and is used to do actions as the reddit account.
@@ -83,8 +95,10 @@ The last thing needed is to send the new subreddit settings to reddit.
 
 # TODO
 
-> I may do some of these, I may do none of these. Depends on how worth-it said features would be
+> I may do some of these, I may do none of these. Depends on how worth-it said feature would be.
 
-Convert to [PRAW](https://praw.readthedocs.io/en/stable/)
-Exceptions and error messages for if things go wrong.
-Logging to file.
+- Convert to [PRAW](https://praw.readthedocs.io/en/stable/)
+
+- ~~Exceptions and error messages if things go wrong.~~
+
+- Logging to file.
