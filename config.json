@@ -1,9 +1,9 @@
 {
     "client_id": "",
     "client_secret": "",
-    "user_agent": "SomethingUnique/1.0 by /u/Rascal_Two for /u/Totschlag running under /u/El_Chubacabot at /r/SaintLouisFC",
+    "user_agent": "SomethingUnique/1.0 by /u/Rascal_Two",
     "username": "",
     "password": "",
-    "subreddit": "SaintLouisFC",
+    "subreddit": "test",
     "check_rate": 600
 }
